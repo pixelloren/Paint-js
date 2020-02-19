@@ -94,6 +94,12 @@ function ChangeTool(toolClicked){
     document.getElementById("open").className = "";
     document.getElementById("save").className = "";
     document.getElementById("brush").className = "";
+
+    document.getElementById("brushRed").className = "";
+    document.getElementById("brushBlue").className = "";
+    document.getElementById("brushYellow").className = "";
+    document.getElementById("brushGreen").className = "";
+
     document.getElementById("line").className = "";
     document.getElementById("rectangle").className = "";
     document.getElementById("circle").className = "";
@@ -113,7 +119,7 @@ function changeColor(colorClicked){
     document.getElementById(colorClicked).className = "selected";
     currentColor = colorClicked;
     if(currentColor === 'red'){
-        currentTool == 'brush';
+        currentTool == 'brushRed';
         document.getElementById("brush").className = "selected";
         currentColor= '#ac3232';
         ctx.strokeStyle = currentColor;
@@ -121,17 +127,17 @@ function changeColor(colorClicked){
     } else if(currentColor === "blue"){
         currentColor= '#5b6ee1';
         ctx.strokeStyle = currentColor;
-        currentTool == 'brush';
+        currentTool == 'brushBlue';
         document.getElementById("brush").className = "selected";
         
     } else if(currentColor === "yellow"){
-        currentTool == 'brush';
+        currentTool == 'brushYellow';
         document.getElementById("brush").className = "selected";
         currentColor= '#f9f499';
         ctx.strokeStyle = currentColor;
 
     } else if(currentColor === "green"){
-        currentTool == 'brush';
+        currentTool == 'brushGreen';
         document.getElementById("brush").className = "selected";
         currentColor= '#37946e';
         ctx.strokeStyle = currentColor;
@@ -262,6 +268,20 @@ function drawRubberbandShape(loc){
     if(currentTool === "brush"){
         // Create paint brush
         DrawBrush();
+
+    } else if(currentColor === 'red'){
+        currentTool == 'brushRed'
+        DrawBrushRed();
+    } else if(currentColor === 'blue'){
+        currentTool == 'brushBlue'
+        DrawBrushBlue();
+    } else if(currentColor === 'yellow'){
+        currentTool == 'brushYellow'
+        DrawBrushYellow();
+    } else if(currentColor === 'green'){
+        currentTool == 'brushGreen'
+        DrawBrushGreen();
+
     } else if(currentTool === "line"){
         // Draw Line
         ctx.beginPath();
@@ -335,7 +355,103 @@ function DrawBrush(){
         ctx.stroke();
     }
 }  
+
+function DrawBrushRed(){
+    for(let i = 1; i < brushXPoints.length; i++){
+        ctx.beginPath();
  
+        // Check if the mouse button was down at this point
+        // and if so continue drawing
+        if(brushDownPos[i]){
+            ctx.moveTo(brushXPoints[i-1], brushYPoints[i-1]);
+        } else {
+            ctx.moveTo(brushXPoints[i]-1, brushYPoints[i]);
+        }
+        ctx.lineTo(brushXPoints[i], brushYPoints[i]);
+        ctx.closePath();
+
+        /*paintStrokes.push([i++, currentColor]);*/
+        if(paintStrokes[i] === null){
+           currentColor == paintStrokes[i];
+        } else paintStrokes.push[i] = currentColor;
+        ctx.strokeStyle = currentColor;
+        currentColor == "red";
+        ctx.stroke();
+    }
+}  
+
+function DrawBrushBlue(){
+    for(let i = 1; i < brushXPoints.length; i++){
+        ctx.beginPath();
+ 
+        // Check if the mouse button was down at this point
+        // and if so continue drawing
+        if(brushDownPos[i]){
+            ctx.moveTo(brushXPoints[i-1], brushYPoints[i-1]);
+        } else {
+            ctx.moveTo(brushXPoints[i]-1, brushYPoints[i]);
+        }
+        ctx.lineTo(brushXPoints[i], brushYPoints[i]);
+        ctx.closePath();
+
+        /*paintStrokes.push([i++, currentColor]);*/
+        if(paintStrokes[i] === null){
+           currentColor == paintStrokes[i];
+        } else paintStrokes.push[i] = currentColor;
+        ctx.strokeStyle = currentColor;
+        currentColor == "blue";
+        ctx.stroke();
+    }
+}  
+
+function DrawBrushYellow(){
+    for(let i = 1; i < brushXPoints.length; i++){
+        ctx.beginPath();
+ 
+        // Check if the mouse button was down at this point
+        // and if so continue drawing
+        if(brushDownPos[i]){
+            ctx.moveTo(brushXPoints[i-1], brushYPoints[i-1]);
+        } else {
+            ctx.moveTo(brushXPoints[i]-1, brushYPoints[i]);
+        }
+        ctx.lineTo(brushXPoints[i], brushYPoints[i]);
+        ctx.closePath();
+
+        /*paintStrokes.push([i++, currentColor]);*/
+        if(paintStrokes[i] === null){
+           currentColor == paintStrokes[i];
+        } else paintStrokes.push[i] = currentColor;
+        ctx.strokeStyle = currentColor;
+        currentColor == "yellow";
+        ctx.stroke();
+    }
+}  
+
+function DrawBrushGreen(){
+    for(let i = 1; i < brushXPoints.length; i++){
+        ctx.beginPath();
+ 
+        // Check if the mouse button was down at this point
+        // and if so continue drawing
+        if(brushDownPos[i]){
+            ctx.moveTo(brushXPoints[i-1], brushYPoints[i-1]);
+        } else {
+            ctx.moveTo(brushXPoints[i]-1, brushYPoints[i]);
+        }
+        ctx.lineTo(brushXPoints[i], brushYPoints[i]);
+        ctx.closePath();
+
+        /*paintStrokes.push([i++, currentColor]);*/
+        if(paintStrokes[i] === null){
+           currentColor == paintStrokes[i];
+        } else paintStrokes.push[i] = currentColor;
+        ctx.strokeStyle = currentColor;
+        currentColor == "green";
+        ctx.stroke();
+    }
+}  
+
 function ReactToMouseDown(e){
     // Change the mouse pointer to a crosshair
     canvas.style.cursor = "crosshair";
@@ -356,6 +472,22 @@ function ReactToMouseDown(e){
         usingBrush = true;
         AddBrushPoint(loc.x, loc.y);
     }
+    else if(currentTool === 'brushRed'){
+        usingBrush = true;
+        AddBrushPoint(loc.x, loc.y);
+    }
+    else if(currentTool === 'brushBlue'){
+        usingBrush = true;
+        AddBrushPoint(loc.x, loc.y);
+    }
+    else if(currentTool === 'brushYellow'){
+        usingBrush = true;
+        AddBrushPoint(loc.x, loc.y);
+    }
+    else if(currentTool === 'brushGreen'){
+        usingBrush = true;
+        AddBrushPoint(loc.x, loc.y);
+    }
     /*let a = 0;
     paintStrokes.push([a++, currentColor]);*/
 
@@ -373,6 +505,39 @@ function ReactToMouseMove(e){
         }
         RedrawCanvasImage();
         DrawBrush();
+
+    if(currentTool === 'brushRed' && dragging && usingBrush){
+        // Throw away brush drawings that occur outside of the canvas
+        if(loc.x > 0 && loc.x < canvasWidth && loc.y > 0 && loc.y < canvasHeight){
+            AddBrushPoint(loc.x, loc.y, true);
+        }
+        RedrawCanvasImage();
+        DrawBrushRed();
+
+    if(currentTool === 'brushBlue' && dragging && usingBrush){
+        // Throw away brush drawings that occur outside of the canvas
+        if(loc.x > 0 && loc.x < canvasWidth && loc.y > 0 && loc.y < canvasHeight){
+            AddBrushPoint(loc.x, loc.y, true);
+        }
+        RedrawCanvasImage();
+        DrawBrushBlue();
+
+    if(currentTool === 'brushYellow' && dragging && usingBrush){
+        // Throw away brush drawings that occur outside of the canvas
+        if(loc.x > 0 && loc.x < canvasWidth && loc.y > 0 && loc.y < canvasHeight){
+            AddBrushPoint(loc.x, loc.y, true);
+        }
+        RedrawCanvasImage();
+        DrawBrushYellow();
+
+    if(currentTool === 'brushGreen' && dragging && usingBrush){
+        // Throw away brush drawings that occur outside of the canvas
+        if(loc.x > 0 && loc.x < canvasWidth && loc.y > 0 && loc.y < canvasHeight){
+            AddBrushPoint(loc.x, loc.y, true);
+        }
+        RedrawCanvasImage();
+        DrawBrushGreen();
+
     } else {
         if(dragging){
             RedrawCanvasImage();
